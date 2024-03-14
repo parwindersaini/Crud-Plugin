@@ -1,0 +1,27 @@
+<h1>Student Form</h1>
+<form id="custom-admin-form">
+    <label >Student Name</label>
+    <input type="text"  name="student_name" >
+    <label >Student Email</label>
+    <input type="email"  name="student_email">
+    <label >Class</label>
+    <input type="text"  name="student_class">
+    <label >Roll No.</label>
+    <input type="text"  name="student_roll_no">
+    <input type="submit"  value="Submit">
+</form>
+<div id="custom-admin-response"></div>
+<p>If you click on the "Hide" button, I will disappear.</p>
+<button id="hide">Hide</button>
+<button id="show">Show</button>
+
+<script>
+    jQuery(document).ready(function($){
+      $("#hide").click(function(){
+        $("p").hide();
+      });
+      $("#show").click(function(){
+        $("p").show();
+      });
+    });
+    </script>
