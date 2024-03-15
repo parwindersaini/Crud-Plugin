@@ -64,9 +64,42 @@ function student_form_menu() {
 }
 add_action('admin_menu', 'student_form_menu');
 
-// Step 2: Callback function to display the admin page and form
-function student_form_page() {   
-  require_once plugin_dir_path( __FILE__ ) . 'student-listing.php';    
-  // require_once plugin_dir_path( __FILE__ ) . 'student_form.html';  
+function custom_admin_form_enqueue_scripts($hook) {
+    if ($hook != 'toplevel_page_custom-admin-form') {
+        return;
+    }
+    wp_enqueue_script('jquery');
+    wp_enqueue_script('custom-admin-ajax-script', plugin_dir_url(__FILE__) . 'js/custom-admin-ajax-script.js', array('jquery'), '1.0', true);
+    wp_localize_script('custom-admin-ajax-script', 'ajax_object', array('ajax_url' => admin_url('admin-ajax.php')));
 }
+add_action('admin_enqueue_scripts', 'custom_admin_form_enqueue_scripts');
+
+require_once plugin_dir_path( __FILE__ ) . 'my_database_handler.php';
+
+
+
+function student_form_page() {  
+    $database_handler = new MyDatabaseHandler('student');
+    $students = $database_handler->fetch_data(); 
+  require_once plugin_dir_path( __FILE__ ) . 'student-listing.php';    
+ //  require_once plugin_dir_path( __FILE__ ) . 'student_form.html';  
+}
+
+
+function handle_custom_admin_form_submission() {
+    require_once plugin_dir_path( __FILE__ ) . 'my_database_handler.php';
+    $database_handler = new MyDatabaseHandler('student');
+    if (isset($_POST['data'])) {
+         parse_str($_POST['data'], $formData);
+    
+       $database_handler->insert_data($formData);
+       $response = array(
+        'success' => true, 
+        'message' => 'Student data saved successfully' // Optional message
+       );
+    wp_send_json($response);
+    }
+}
+add_action('wp_ajax_custom_admin_form_submit', 'handle_custom_admin_form_submission');
+
 

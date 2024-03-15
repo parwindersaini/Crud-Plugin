@@ -1,25 +1,12 @@
 
 <?php
-require_once plugin_dir_path( __FILE__ ) . 'my_database_handler.php';
-$database_handler = new MyDatabaseHandler('student');
-$students = $database_handler->fetch_data();
+// require_once plugin_dir_path( __FILE__ ) . 'my_database_handler.php';
+// $database_handler = new MyDatabaseHandler('student');
+// $students = $database_handler->fetch_data();
 // echo "<pre>";
 // print_r($students);
 
-if(isset($_POST['SubmitButton'])){ //check if form was submitted
- $name= $_POST['student_name'];
- $email= $_POST['student_email'];
- $class= $_POST['student_class'];
- $rollno= $_POST['student_roll_no'];
- $data = array(
-  'student_name' =>  $name,
-  'student_email' => $email,
-  'class' =>  $class,
-  'roll_no' => $rollno
-);
-$database_handler->insert_data($data);
-$students = $database_handler->fetch_data();
-} 
+
 
 
 
@@ -45,14 +32,14 @@ table, th, td {
       <th>Action</th>
     </tr>
     <?php
-    foreach ($students as $student) {
+    foreach ($students as $key=>$student) {
           echo '<tr>';
           
               echo '<td>' . $student['roll_no'] . '</td>';
               echo '<td>' . $student['student_name'] . '</td>';
               echo '<td>' . $student['student_email'] . '</td>';
               echo '<td>' . $student['class'] . '</td>';
-              echo '<td>edit delete</td>';
+              echo '<td>'.$key.'</td>';
         
           echo '</tr>';
     } ?>
@@ -66,22 +53,13 @@ table, th, td {
     <label >Student Email</label>
     <input type="email"  name="student_email">
     <label >Class</label>
-    <input type="text"  name="student_class">
+    <input type="text"  name="class">
     <label >Roll No.</label>
-    <input type="text"  name="student_roll_no">
-    <input type="submit" name="SubmitButton" value="Submit">
+    <input type="text"  name="roll_no">
+    <input type="submit"  value="Submit">
 </form>
 </div>
-<script>
-    jQuery(document).ready(function($){
-      $("#student_form").hide();
-      $("#form").click(function(){
-        $("#listing").hide();
-        $("#student_form").show();
-      });
-      
-    });
-    </script>
+
 </body>
 
 
