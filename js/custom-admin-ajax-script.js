@@ -1,11 +1,18 @@
+var student="";
 jQuery(document).ready(function($) {
+    var student="";
     jQuery(document).ready(function($){
         $("#student_form").hide();
         $("#form").click(function(){
           $("#listing").hide();
           $("#student_form").show();
         });
-        
+        $(".edit-form").click(function(){
+            $("#listing").hide();
+            $("#student_edit_form").show();           
+            var student=data[$(this).attr("data-id")];
+            // console.log( student);
+          });
       });
     $('#custom-admin-form').submit(function(e) {
         e.preventDefault();
