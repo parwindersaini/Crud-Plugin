@@ -37,7 +37,7 @@ echo "<script>var data = $json;
         echo '<td>' . $student['student_name'] . '</td>';
         echo '<td>' . $student['student_email'] . '</td>';
         echo '<td>' . $student['class'] . '</td>';
-        echo '<td> <button class="edit-form" data-id='.$key.'>Edit</button> </td>';
+        echo '<td> <button class="edit-form" data-id='.$key.'>Edit</button> <button class="delete-student" data-id='.$key.'>Delete</button></td>';
 
         echo '</tr>';
       } ?>
@@ -46,30 +46,18 @@ echo "<script>var data = $json;
   <div id="student_form">
     <h1>Student Form</h1>
     <form id="custom-admin-form" method="post" action="">
+      <input type="hidden" id="id" name="id" >
       <label>Student Name</label>
-      <input type="text" name="student_name">
+      <input type="text" id="name" name="student_name">
       <label>Student Email</label>
-      <input type="email" name="student_email">
+      <input type="email" id="email" name="student_email">
       <label>Class</label>
-      <input type="text" name="class">
+      <input type="text" id="class" name="class">
       <label>Roll No.</label>
-      <input type="text" name="roll_no">
+      <input type="text" id="roll_no" name="roll_no">
       <input type="submit" value="Submit">
     </form>
   </div>
-  <div id="student_edit_form">
-    <h1>Student Edit Form</h1>
-    <form id="custom-admin-form" method="post" action="">
-      <label>Student Name</label>
-      <input type="text" name="student_name">
-      <label>Student Email</label>
-      <input type="email" name="student_email">
-      <label>Class</label>
-      <input type="text" name="class">
-      <label>Roll No.</label>
-      <input type="text" name="roll_no">
-      <input type="submit" value="Submit">
-    </form>
-  </div>
+  
 
 

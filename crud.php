@@ -26,7 +26,7 @@ function create_table() {
         student_name VARCHAR(50) NOT NULL,
         student_email VARCHAR(50) NOT NULL,
         class VARCHAR(50) NOT NULL,
-        roll_no INT NOT NULL,
+        roll_no INT NOT NULL, 
         PRIMARY KEY (id)
     )";
     
@@ -90,13 +90,29 @@ function handle_custom_admin_form_submission() {
     require_once plugin_dir_path( __FILE__ ) . 'my_database_handler.php';
     $database_handler = new MyDatabaseHandler('student');
     if (isset($_POST['data'])) {
+            if($_POST['data']['id']){
+                    $where = array( 'id' => $_POST['data']['id'] );
+                    $database_handler->delete_data($where);
+            }   
          parse_str($_POST['data'], $formData);
-    
-       $database_handler->insert_data($formData);
-       $response = array(
-        'success' => true, 
-        'message' => 'Student data saved successfully' // Optional message
-       );
+         if(!empty($formData['id'])){
+
+            $where = array(
+                'id' => $formData['id'] 
+            );
+            $database_handler->update_data($formData,$where);                 
+            $response = array(
+                'success' => true, 
+                'message' => 'Student data Updated successfully' // Optional message
+            );
+         }else{  
+             
+            $database_handler->insert_data($formData);
+            $response = array(
+                'success' => true, 
+                'message' => 'Student data saved successfully' // Optional message
+            );
+        }
     wp_send_json($response);
     }
 }
