@@ -53,20 +53,29 @@ jQuery(document).ready(function($) {
       });
     $('#custom-admin-form').submit(function(e) { 
         e.preventDefault();
-        var form_data = $(this).serialize();
-       console.log(form_data);
-        $.ajax({
-            type: 'POST',
-            url: ajax_object.ajax_url,
-            data: {
-                action: 'custom_admin_form_submit',
-                data:form_data // Get input data value
-            },
-            success: function(response) {
-                if (response.success) {
-                     location.reload();
-                } 
-            }
-        });
+        var name=$('#name').val();
+        var email=$('#email').val();
+        var roll_no=$('#roll_no').val();
+        var s_class =$('#class').val();
+        if(name && email && roll_no && s_class){
+            var form_data = $(this).serialize();
+                    console.log(name);
+                    
+                    $.ajax({
+                        type: 'POST',
+                        url: ajax_object.ajax_url,
+                        data: {
+                            action: 'custom_admin_form_submit',
+                            data:form_data // Get input data value
+                        },
+                        success: function(response) {
+                            if (response.success) {
+                                location.reload();
+                            } 
+                        }
+                    });
+        }else{
+        alert('Please fill all fields');
+        }       
     });
 });
