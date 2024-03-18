@@ -34,6 +34,11 @@ jQuery(document).ready(function($) {
             }
 
         });
+         $("#cancel").click(function(){
+
+          $("#listing").show();
+          $("#student_form").hide();
+        });
         $(".edit-form").click(function(){
             $("#listing").hide();
             $("#student_form").show();           
@@ -59,7 +64,7 @@ jQuery(document).ready(function($) {
             },
             success: function(response) {
                 if (response.success) {
-                    location.reload();
+                     location.reload();
                 } 
             }
         });

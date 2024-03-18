@@ -93,26 +93,34 @@ function handle_custom_admin_form_submission() {
             if($_POST['data']['id']){
                     $where = array( 'id' => $_POST['data']['id'] );
                     $database_handler->delete_data($where);
+            $response = array(
+                'success' => true, 
+                'message' => 'Student data deleted successfully' // Optional message
+            );
             }   
          parse_str($_POST['data'], $formData);
-         if(!empty($formData['id'])){
+        if($formData){
+            if(!empty($formData['id'])){
 
-            $where = array(
-                'id' => $formData['id'] 
-            );
-            $database_handler->update_data($formData,$where);                 
-            $response = array(
-                'success' => true, 
-                'message' => 'Student data Updated successfully' // Optional message
-            );
-         }else{  
-             
-            $database_handler->insert_data($formData);
-            $response = array(
-                'success' => true, 
-                'message' => 'Student data saved successfully' // Optional message
-            );
-        }
+                        $where = array(
+                            'id' => $formData['id'] 
+                        );
+                        $database_handler->update_data($formData,$where);                 
+                        $response = array(
+                            'success' => true, 
+                            'message' => 'Student data Updated successfully' // Optional message
+                        );
+                    }else{  
+                        
+                        $database_handler->insert_data($formData);
+                        $response = array(
+                            'success' => true, 
+                            'message' => $formData // Optional message
+                        );
+                    }
+
+            }
+        
     wp_send_json($response);
     }
 }

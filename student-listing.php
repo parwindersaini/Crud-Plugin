@@ -48,14 +48,15 @@ echo "<script>var data = $json;
     <form id="custom-admin-form" method="post" action="">
       <input type="hidden" id="id" name="id" >
       <label>Student Name</label>
-      <input type="text" id="name" name="student_name">
+      <input type="text" id="name" name="student_name"><br>
       <label>Student Email</label>
-      <input type="email" id="email" name="student_email">
+      <input type="email" id="email" name="student_email"><br>
       <label>Class</label>
-      <input type="text" id="class" name="class">
+      <input type="text" id="class" name="class"><br>
       <label>Roll No.</label>
-      <input type="text" id="roll_no" name="roll_no">
+      <input type="number" id="roll_no" name="roll_no"><br>
       <input type="submit" value="Submit">
+      <input type="button" id="cancel" value="cancel">
     </form>
   </div>
   
