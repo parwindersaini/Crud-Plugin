@@ -1,23 +1,14 @@
 <?php
-// require_once plugin_dir_path( __FILE__ ) . 'my_database_handler.php';
-// $database_handler = new MyDatabaseHandler('student');
-// $students = $database_handler->fetch_data();
-// echo "<pre>";
-// print_r($students);
-
-$json = json_encode($students);
-echo "<script>var data = $json;
-</script>";
+    $database_handler = new MyDatabaseHandler('student');
+    $students = $database_handler->fetch_data();
+    $json = json_encode($students);
+    echo "<script>var data = $json;</script>";
 ?>
 <style>
-  table,
-  th,
-  td {
-    border: 1px solid black;
-  }
+    table,th,td {
+      border: 1px solid black;
+    }
 </style>
-
-
   <div id="listing">
     <h2>Student Listing</h2>
     <button id="form">Create</button>

@@ -11,8 +11,6 @@ if (!defined('ABSPATH')) {
     exit;
 }
 
-
-
 // Plugin Activation Hook
 register_activation_hook(__FILE__, 'create_table');
 
@@ -68,11 +66,8 @@ function student_form_menu()
 }
 add_action('admin_menu', 'student_form_menu');
 
-function custom_admin_form_enqueue_scripts($hook)
-{
-    if ($hook != 'toplevel_page_custom-admin-form') {
-        return;
-    }
+function custom_admin_form_enqueue_scripts()
+{    
     wp_enqueue_script('jquery');
     wp_enqueue_script('custom-admin-ajax-script', plugin_dir_url(__FILE__) . 'js/custom-admin-ajax-script.js', array('jquery'), '1.0', true);
     wp_localize_script('custom-admin-ajax-script', 'ajax_object', array('ajax_url' => admin_url('admin-ajax.php')));
@@ -84,11 +79,8 @@ require_once plugin_dir_path(__FILE__) . 'my_database_handler.php';
 
 
 function student_form_page()
-{
-    $database_handler = new MyDatabaseHandler('student');
-    $students = $database_handler->fetch_data();
-    require_once plugin_dir_path(__FILE__) . 'student-listing.php';
-    //  require_once plugin_dir_path( __FILE__ ) . 'student_form.html';  
+{   
+    require_once plugin_dir_path(__FILE__) . 'student-listing.php';     
 }
 
 

@@ -1,6 +1,5 @@
-var student = "";
-jQuery(document).ready(function ($) {
-  var student = "";
+
+jQuery(document).ready(function ($) { 
 
   $("#student_form").hide();
   $("#form").click(function () {
@@ -9,7 +8,7 @@ jQuery(document).ready(function ($) {
   });
   $(".delete-student").click(function () {
     if (confirm("Are you sure you want to delete this?")) {
-      var student = data[$(this).attr("data-id")];
+      let student = data[$(this).attr("data-id")];
       const form_data = { id: student["id"] };
 
       console.log(form_data);
@@ -37,7 +36,7 @@ jQuery(document).ready(function ($) {
   $(".edit-form").click(function () {
     $("#listing").hide();
     $("#student_form").show();
-    var student = data[$(this).attr("data-id")];
+    let student = data[$(this).attr("data-id")];
     $("#name").val(student["student_name"]);
     $("#email").val(student["student_email"]);
     $("#class").val(student["class"]);
